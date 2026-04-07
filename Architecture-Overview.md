@@ -4,7 +4,7 @@
 # Home Lab Architecture Overview
 
 > **Version:** 1.0  
-> **Last Updated:** [Date]  
+> **Last Updated:** [2026-04-07]  
 > **Purpose:** High-level documentation of service topology, network flow, and storage architecture for the home server environment.
 
 ## 🏗️ System Topology

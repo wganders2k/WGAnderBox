@@ -4,7 +4,7 @@
 # Backup & Disaster Recovery (DR) Plan
 
 > **Version:** 1.0  
-> **Last Updated:** [Date]  
+> **Last Updated:** [2026-04-07]  
 > **Status:** ⚠️ **Partial Protection Active** | Critical Configs Unbacked Up  
 
 This document outlines the current strategy for protecting data and services within the Home Lab infrastructure. It distinguishes between hardware redundancy (SnapRAID) and actual file backups, highlighting where single points of failure currently exist.

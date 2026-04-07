@@ -5,7 +5,7 @@
 # Home Lab Hardware Inventory
 
 > **Version:** 1.0  
-> **Last Updated:** [Date]  
+> **Last Updated:** [2026-04-07]  
 > **Status:** Public Repo Ready (No Serials or Sensitive Data)  
 
 This document outlines the physical components comprising the home server infrastructure, split by node and networking peripherals.

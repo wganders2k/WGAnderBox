@@ -4,7 +4,7 @@
 # Storage Architecture & File Structure Guide
 
 > **Version:** 1.0  
-> **Last Updated:** [Date]  
+> **Last Updated:** [2026-04-07]  
 > **Purpose:** Documentation of storage pooling strategy, directory layout, and mount points for the Home Lab infrastructure.  
 
 ## 💾 Storage Pool Overview

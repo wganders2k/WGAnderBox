@@ -4,7 +4,7 @@
 # Home Lab: Future Roadmap & Upgrade Plan
 
 > **Version:** 2.0  
-> **Last Updated:** [Date]  
+> **Last Updated:** [2026-04-07]  
 > **Status:** Planning Phase  
 
 This document outlines future hardware expansions, software improvements, and strategic upgrades for the home lab infrastructure. Priorities are ranked based on **Risk Mitigation** (Need), followed by Cost and Implementation Ease.
