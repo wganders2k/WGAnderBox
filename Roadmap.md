@@ -1,15 +1,10 @@
-This plan is solid! 🧠 It addresses your HDD wear concerns directly while keeping performance high for new content. I’ve integrated these detailed technical specifications into the **Future Roadmap** document, specifically updating Phase 2 (Storage Performance) to reflect this "Hot/Cold" architecture. 
-
-To maintain consistency across your repo, I aligned the paths in the roadmap with what we defined earlier (`/media/array` instead of `/mnt/storage`) so you don't have conflicting documentation between `storage-structure.md` and `future-roadmap.md`. 🛠️
-
-Here is your updated **Future Roadmap & Upgrade Plan**:
 
 ---
 
 # Home Lab: Future Roadmap & Upgrade Plan
 
 > **Version:** 2.1  
-> **Last Updated:** [Date]  
+> **Last Updated:** [2026-04-07]  
 > **Status:** Planning Phase  
 
 This document outlines future hardware expansions, software improvements, and strategic upgrades for the home lab infrastructure. Priorities are ranked based on **Risk Mitigation** (Need), followed by Cost and Implementation Ease.
