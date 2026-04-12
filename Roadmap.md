@@ -1,13 +1,14 @@
-
 ---
 
 # Home Lab: Future Roadmap & Upgrade Plan
 
-> **Version:** 2.2  
-> **Last Updated:** [2026-04-07]  
+> **Version:** 3  
+> **Last Updated:** [2026-04-11]  
 > **Status:** Planning Phase  
 
 This document outlines future hardware expansions, software improvements, and strategic upgrades for the home lab infrastructure. Priorities are ranked based on **Risk Mitigation** (Need), followed by Cost and Implementation Ease.
+
+---
 
 ## 🎯 Strategic Objectives
 1.  **Stabilize Critical Data:** Eliminate single points of failure on OS/AppData storage immediately.
@@ -39,50 +40,28 @@ This document outlines future hardware expansions, software improvements, and st
 
 ---
 
-## 📋 Phase 2: Storage Performance & Longevity (Medium Priority)
-*Focus: Protecting HDDs, improving media performance via Tiered Architecture, and expanding capacity.*
+## 📋 Phase 2: Service Consolidation & Security (Medium Priority)
+*Focus: Centralizing authentication and adding personal cloud services.*
 
-### 3. Hot/Cold SSD Caching Implementation 💾 **⭐ HIGH TECHNICAL FOCUS**
-**Current Pain Point:** High I/O load from torrents/QBittorrent wears out HDDs quickly; Plex latency on new content.  
-**Proposed Solution:** Integrate a high-capacity (4TB) SSD as the "Hot" tier, pooled with existing HDDs ("Cold" tier).
+### 3. Authentik SSO Implementation 🔐
+**Current State:** Individual service logins with no centralized authentication.  
+**Proposed Solution:** Deploy Authentik as the identity provider for all internal services.
+*   **Usage Scope:** 
+    *   Single Sign-On (SSO) for all web applications.
+    *   Centralized 2FA/MFA enforcement across services.
+    *   User management and access control policies.
+*   **Integration:** Works alongside Cloudflare Tunnels (Tailscale for network access, Authentik for application login).
+*   **Why:** Improves security posture and simplifies user management without exposing additional ports.
 
-#### **3a. MergerFS Configuration Strategy**
-*   **Main Server Mount Point:** `/mnt/storage/array/` (Logical View of Storage Pool on Main Server).
-*   **Policy:** `category.create=ff`. The SSD will be listed first in the mount string, ensuring all new downloads land on it by default.
-*   **Config Snippet (`/etc/fstab`):**
-    ```bash
-    # /mnt/storage/array = [SSD Cache] + [HDD Array]
-    /mnt/ssd_cache:/mnt/hdd1:/mnt/hdd2...  /mnt/storage/array  mergerfs  defaults,category.create=ff,cache.files=partial,dropcacheonclose=true,allow_other,minfreespace=100G 0 0
-    ```
-
-#### **3b. Directory Structure & Hardlinks**
-To ensure space efficiency and atomic moves:
-*   **Single Root:** Mount `/mnt/storage/array` in Docker (instead of separate `downloads`/`movies`).
-*   **Subfolders on Main Server:** 
-    *   `/mnt/storage/array/downloads`: Active seeding/downloads.
-    *   `/mnt/storage/array/movies`, `/tv`, `/anime`: Library for Plex/Sonarr/Radarr.
-*   **MiniPC Access (Samba):** The MiniPC mounts this via SMB to access files as: `/media/array/`.
-*   **Hardlink Logic:** When Radarr moves a file, it remains on the SSD (same Inode) until archived to HDD, ensuring zero data duplication during the transition.
-
-#### **3c. Automated Mover (`mergerfs-cache-mover`)**
-A nightly Cron job manages the migration from Hot (SSD) to Cold (HDD).
-*   **Seeding Policy:** `MIN_AGE=21d`. Ensures files stay on SSD for at least 3 weeks (exceeds private tracker minimums of ~14 days).
-*   **Capacity Trigger:** `THRESHOLD=70%` (~2.8TB used). Script only activates when space is tight.
-*   **SnapRAID Integration:** The SSD is **EXCLUDED** from the SnapRAID config to prevent constant parity syncs and HDD spin-ups during downloads. Loss of recent data (SSD failure) can be mitigated by re-downloading via Sonarr/Radarr "Missing" filter.
-
-#### **3d. Implementation Checklist**
-*   [ ] Update `/etc/fstab` with new SSD mount point first in the list (`/mnt/storage/array`).
-*   [ ] Configure `mergerfs-cache-mover` script (Path: `/opt/scripts/mover.sh`).
-*   [ ] Ensure mover has access to physical disk paths (`/mnt/hdd1`, etc.) to bypass mergerfs for hardlink maintenance.
-*   [ ] Set up Cron schedule: Mover at 3:00 AM, SnapRAID sync at 6:00 AM.
-
-### 4. Storage Expansion (20TB CMR Drives) 💾 **🔴 HIGH COST / LOW PRIORITY**
-**Current Constraint:** Current array is full; HDD prices are currently inflated.  
-**Proposed Solution:** Acquire high-capacity 20TB CMR drives to expand the "Cold" tier capacity significantly.
-*   **Prerequisites:** 
-    *   Requires LSI 9305-16i expansion card (to add SATA ports).
-    *   May require PSU upgrade (e.g., 1200W) depending on total drive count and power draw.
-*   **Status:** Monitor prices closely; purchase only when CMR pricing drops to reasonable levels compared to current market inflation.
+### 4. Immich Personal Cloud 📸
+**Current State:** Photos stored locally with no centralized backup or sharing.  
+**Proposed Solution:** Deploy Immich for photo/video management and backup.
+*   **Storage Target:** Direct write to HDD array (no SSD caching needed).
+*   **Usage Scope:** 
+    *   Mobile backup for personal devices.
+    *   Photo organization and sharing with family.
+    *   Long-term archival of media files.
+*   **Why:** Provides a self-hosted Google Photos alternative with full data ownership.
 
 ---
 
@@ -110,9 +89,10 @@ A nightly Cron job manages the migration from Hot (SSD) to Cold (HDD).
 | :--- | :--- | :--- | :--- | :--- |
 | **OS Backup Script + NVMe** | 🔴 Critical | 🟢 Low | 🟢 Easy | **#1 Priority** |
 | **Tailscale Setup (SSH/Backend)** | 🟡 Medium | 🟢 Free | 🟢 Easy | **#2 Priority** |
-| **SSD Cache / Hot-Cold Tiering** | 🟡 High (Longevity) | 🔴 Med | 🟠 Moderate | **#3 Priority** |
-| **HDD Expansion (20TB CMR)** | 🟢 Low (Capacity) | 🔴 Very High | 🟠 Harder | **#4 Priority** |
-| **Plex Transcoding Offload (Arc A310)** | 🟢 Low (Consolidation)| 🟡 Med/High | 🟠 Moderate | **#5 Priority** |
+| **Authentik SSO Implementation** | 🟡 High (Security) | 🟢 Low | 🟢 Moderate | **#3 Priority** |
+| **Immich Personal Cloud** | 🟡 Medium (Convenience) | 🟢 Low | 🟢 Moderate | **#4 Priority** |
+| **HDD Expansion (20TB CMR)** | 🟢 Low (Capacity) | 🔴 Very High | 🟠 Harder | **#5 Priority** |
+| **Plex Transcoding Offload (Arc A310)** | 🟢 Low (Consolidation)| 🟡 Med/High | 🟠 Moderate | **#6 Priority** |
 
 ---
 
@@ -127,5 +107,6 @@ A nightly Cron job manages the migration from Hot (SSD) to Cold (HDD).
 1.  **Action Item:** Purchase and install identical NVMe drive for OS backup testing.
 2.  **Scripting:** Draft daily `rsync` script to mirror `/opt/appdata`.
 3.  **Networking:** Install Tailscale client containers on Main Server/MiniPC.
+4.  **Planning:** Research Authentik deployment and Immich storage requirements.
 
 ---

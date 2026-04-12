@@ -1,10 +1,9 @@
-
 ---
 
 # Home Lab Architecture Overview
 
-> **Version:** 1.0  
-> **Last Updated:** [2026-04-07]  
+> **Version:** 1.1  
+> **Last Updated:** [2026-04-11]  
 > **Purpose:** High-level documentation of service topology, network flow, and storage architecture for the home server environment.
 
 ## 🏗️ System Topology
@@ -54,6 +53,15 @@ To expose services securely without opening traditional ports, **Cloudflare Tunn
 
 ## 💾 Data Flow & Storage Architecture
 
+### Storage Overview
+The Main Server uses a **3-tier storage architecture** combining:
+*   **NVMe SSD Cache** (4TB) – High-speed I/O for active downloads and frequently accessed media
+*   **HDD Pool** (3× 8TB) – Merged storage for media libraries
+*   **Parity Drive** (1× 8TB) – SnapRAID redundancy for data protection
+
+For detailed storage layout, directory structure, and migration workflows, see **[Storage-Overview.md](./Storage-Overview.md)**.
+
+### Data Flow
 | Component | Location | Access Method |
 | :--- | :--- | :--- |
 | **System Drives** | Main Server (Internal) | Local Mount / Docker Volumes |

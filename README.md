@@ -32,7 +32,4 @@ Since home lab setups often use specific terminology, here are the key terms use
 *   **Public Repo Safety:** This repository contains **NO** sensitive credentials, API keys, or private IP addresses. All secrets are stored locally only (e.g., `.env` files). 
 *   **Hardware Risks:** Some components listed in the Hardware Inventory may be repurposed from previous builds and have varying warranty statuses.
 
-## 🤝 Contributing / Forking
-Feel free to fork this repo for your own reference! If you find any errors or improvements, please open an Issue or Pull Request (though I'm mostly documenting my *own* setup right now!). 
-
 ---

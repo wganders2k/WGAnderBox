@@ -21,6 +21,7 @@ This document outlines the physical components comprising the home server infras
 | **CPU** | Intel Core i7-8700K | 6-Core / 12-Thread processor for general compute tasks. |
 | **GPU** | ASUS ROG Strix RTX 3090 (O24G-Gaming) | Dedicated AI acceleration & rendering. <br>💡 *Maintenance: Repasted and repadded [Month/Year].* |
 | **System SSD** | Samsung NVMe M.2, 1TB *(Model: Estimated 970 EVO Plus)* | OS + Application storage. Model confirmed via visual inspection only. |
+| **Storage Cache** | WD Black SN850x NVMe SSD, 4TB | Hot layer cache for storage array. High-speed access tier. |
 | **Storage (HDD)** | Seagate BarraCuda 8TB HDD x4 | Total Raw Capacity: 32TB. SATA III / 5400 RPM. |
 | **RAM** | G.Skill Trident Z RGB DDR4, 32GB (4x 8GB) @ 3200MHz | High-speed memory for VM/Container overhead. |
 | **Power Supply** | CORSAIR RM850x Fully Modular ATX PSU | Low-noise operation with sufficient headroom for GPU loads. |
@@ -48,5 +49,6 @@ This document outlines the physical components comprising the home server infras
 
 *   **GPU Health:** The RTX 3090 received thermal maintenance (repaste/re-pad) last month to ensure optimal temperatures during LLM training and inference tasks.
 *   **Storage Configuration:** All HDDs are configured as internal storage on the Main Server; MiniPC accesses this data via SMB/Samba over LAN. SMART monitoring via scrutiny.
+*   **Cache Layer:** WD Black SN850x 4TB NVMe SSD deployed as hot tier cache for newly added storage array data.
 
 ---
