@@ -1,11 +1,9 @@
-
-
 ---
 
 # Home Lab Hardware Inventory
 
-> **Version:** 1.0  
-> **Last Updated:** [2026-04-07]  
+> **Version:** 1.1  
+> **Last Updated:** [2026-04-13]  
 > **Status:** Public Repo Ready (No Serials or Sensitive Data)  
 
 This document outlines the physical components comprising the home server infrastructure, split by node and networking peripherals.
@@ -24,7 +22,7 @@ This document outlines the physical components comprising the home server infras
 | **Storage Cache** | WD Black SN850x NVMe SSD, 4TB | Hot layer cache for storage array. High-speed access tier. |
 | **Storage (HDD)** | Seagate BarraCuda 8TB HDD x4 | Total Raw Capacity: 32TB. SATA III / 5400 RPM. |
 | **RAM** | G.Skill Trident Z RGB DDR4, 32GB (4x 8GB) @ 3200MHz | High-speed memory for VM/Container overhead. |
-| **Power Supply** | CORSAIR RM850x Fully Modular ATX PSU | Low-noise operation with sufficient headroom for GPU loads. |
+| **Power Supply** | CORSAIR HX1200i Fully Modular ATX PSU | High-efficiency unit with sufficient headroom for GPU loads. |
 
 ## 💻 MiniPC Node (Beelink)
 **Role:** Media Transcoding / Knowledge Base Hosting  
